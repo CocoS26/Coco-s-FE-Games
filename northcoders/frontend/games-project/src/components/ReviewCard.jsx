@@ -12,14 +12,15 @@ export default function ReviewCard({review_id, owner, title, category}){
                 <strong>
                     <u>{owner}</u>
                 </strong>
-            </h3>
+            </h3>  
+        </Link>
         <p>
             <strong>title:</strong> {title}
         </p>
         <p>
             <strong>Category:</strong>{category}
         </p>
-        </Link>
+      
         </section>
             
         </>

@@ -6,8 +6,6 @@ const reviewApi = axios.create({
 });
 
 
-
-
 export const getCategories =()=>{
     return reviewApi.get('/categories')
     .then((res)=>{
@@ -15,8 +13,8 @@ export const getCategories =()=>{
     })
 }
 export const getReviews = (category)=>{
-    let validCategories = [ 'euro game','social deduction','dexterity',"children's games"]
-    if (validCategories.includes(category)){
+    
+    if (category){
         return reviewApi.get(`/reviews?category=${category}`)
         .then ((res)=>{
             return res.data
@@ -27,10 +25,27 @@ export const getReviews = (category)=>{
         return res.data
     })
 }
-
 export const getSingleReview = (review_id)=>{
     return reviewApi.get(`/reviews/${review_id}`)
     .then ((res)=>{
         return res.data.review
+    })
+}
+
+export const getCommentByReviewId = (review_id)=>{
+    return reviewApi.get(`/reviews/${review_id}/comments`)
+    .then((res)=>{
+        return res.data
+    })
+}
+
+export const patchComment = (review_id) =>{
+    const patchBody={
+        inc_votes: 1,
+    };
+    return reviewApi
+    .patch(`/reviews/${review_id}`, patchBody)
+    .then(({data})=>{
+        return data.review
     })
 }

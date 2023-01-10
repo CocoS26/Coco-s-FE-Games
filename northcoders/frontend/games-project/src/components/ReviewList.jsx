@@ -21,6 +21,7 @@ export default function Reviews() {
         })
     }, [sortByCategory])
 
+
     if (isLoading) return <p className="Loading">Loading...</p>
    
     return (
