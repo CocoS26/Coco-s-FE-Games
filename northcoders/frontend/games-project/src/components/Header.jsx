@@ -1,12 +1,12 @@
+import React from "react";
 
 const Header =()=>{
     return (
-        <>
-        <h1>
-            Find out your favourite games!
-        </h1>
-
-        </>
+        <header className ="Header">
+            
+            <h1>NC-Games!</h1>
+         
+        </header>
         
     );
 }
