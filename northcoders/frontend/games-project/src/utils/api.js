@@ -39,13 +39,13 @@ export const getCommentByReviewId = (review_id)=>{
     })
 }
 
-export const patchComment = (review_id) =>{
+export const patchComment = (review_id,inc) =>{
     const patchBody={
-        inc_votes: 1,
+        inc_votes: inc,
     };
     return reviewApi
     .patch(`/reviews/${review_id}`, patchBody)
     .then(({data})=>{
-        return data.review
+        return data
     })
 }

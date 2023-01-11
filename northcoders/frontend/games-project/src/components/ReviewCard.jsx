@@ -10,12 +10,12 @@ export default function ReviewCard({review_id, owner, title, category}){
         <Link to={`/reviews/${review_id}`}>
             <h3>
                 <strong>
-                    <u>{owner}</u>
+                    <u>{title}</u>
                 </strong>
             </h3>  
         </Link>
         <p>
-            <strong>title:</strong> {title}
+            <strong>Owner:</strong> {owner}
         </p>
         <p>
             <strong>Category:</strong>{category}
