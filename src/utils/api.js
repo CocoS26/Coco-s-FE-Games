@@ -13,17 +13,9 @@ export const getCategories =()=>{
 }
 export const getReviews = (category,sort_by, order)=>{
     let queryString= '/reviews'
-    if (sort_by){
-        queryString+=`?sort_by=${sort_by}`
-    }
-    if (order){
-        queryString +=`&order=${order}`
-    }
-    if (category){
-        queryString +=`&category=${category}`
-    }
+
     
-    return reviewApi.get(queryString)
+    return reviewApi.get(queryString,{params:{category:category, order:order, sort_by:sort_by}})
         .then ((res)=>{
             return res.data       
     })

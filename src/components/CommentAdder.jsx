@@ -4,8 +4,7 @@ const CommentAdder = () =>{
     const [newComment, setNewComment] = useState('');
     const handleSubmit = (e) =>{
         e.preventDefault();
-        // postComment(newComment)
-        // .then
+ 
     };
     return (
         <form className ="CommentAdder" onSubmit={handleSubmit}>
