@@ -22,7 +22,6 @@ export const getReviews = (category,sort_by, order)=>{
     if (category){
         queryString +=`&category=${category}`
     }
-    
     return reviewApi.get(queryString)
         .then ((res)=>{
             return res.data       
