@@ -6,13 +6,7 @@ import ReviewList from './components/ReviewList'
 import Error from './components/Error';
 import SingleReview from './components/SingleReview';
 import Auth from "./components/Auth";
-// import { useContext } from 'react';
-// import { UserContext } from './components/Users';
-
-
 function App() {
-  // const userValue = useContext(UserContext)
-  // const [user, setUser] = userState({ name: 'Paul'})
   return (
     <div className="App">
       <Header />
@@ -23,11 +17,7 @@ function App() {
       <Route path= "/reviews/:review_id" element={<SingleReview />} />
       <Route path= "/*" element={<Error />} />
       </Routes>
-  
     </div>
-
-    
   );
 }
-
 export default App;
