@@ -7,7 +7,10 @@ import Error from './components/Error';
 import SingleReview from './components/SingleReview';
 import Auth from "./components/Auth";
 
+
+
 function App() {
+
   return (
     <div className="App">
       <Header />

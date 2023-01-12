@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 const reviewApi = axios.create({
     baseURL : "https://cocos-be-games-project.onrender.com/api",
 });
@@ -12,19 +11,16 @@ export const getCategories =()=>{
         return res.data
     })
 }
-export const getReviews = (category)=>{
+export const getReviews = (category,sort_by, order)=>{
+    let queryString= '/reviews'
+
     
-    if (category){
-        return reviewApi.get(`/reviews?category=${category}`)
+    return reviewApi.get(queryString,{params:{category:category, order:order, sort_by:sort_by}})
         .then ((res)=>{
-            return res.data
-        })
-    }
-    return reviewApi.get("/reviews", {params:{category:category}})
-    .then ((res)=>{
-        return res.data
+            return res.data       
     })
-}
+    }
+    
 export const getSingleReview = (review_id)=>{
     return reviewApi.get(`/reviews/${review_id}`)
     .then ((res)=>{
@@ -46,6 +42,20 @@ export const patchComment = (review_id,inc) =>{
     return reviewApi
     .patch(`/reviews/${review_id}`, patchBody)
     .then(({data})=>{
+        return data
+    })
+}
+
+export const postComment = (review_id, name, body, created_at) =>{
+    const postBody={
+        username: name,
+        body: body,
+        created_at: created_at
+    };
+    return reviewApi
+    .post(`/reviews/${review_id}/comments`, postBody)
+    .then(({data})=>{
+        console.log(data)
         return data
     })
 }

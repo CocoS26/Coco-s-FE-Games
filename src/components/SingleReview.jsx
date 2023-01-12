@@ -6,13 +6,12 @@ import { Link } from "react-router-dom"
 import { getSingleReview } from "../utils/api";
 import { patchComment } from "../utils/api";
 import Comments from "./Comments"
-import CommentAdder from "./CommentAdder";
+
 
 export default function SingleReview() {
     const { review_id } = useParams();
     const [review, setReview] = useState({});
     const [isError, setIsError] = useState(false);
-    
     useEffect(()=>{
         getSingleReview(review_id)
         .then((newReview)=>{
@@ -22,11 +21,8 @@ export default function SingleReview() {
             setReview(newReview)
         });
     },[review_id])
-
     if (!review.review_id) return <p>This review does not exist</p>
-
     const{title, designer, owner, review_img_url, category, review_body, created_at,votes,comment_count} = review
-
     const upVote = (review_id,inc) =>{
         patchComment(review_id,inc)
         .then(()=>{
@@ -48,8 +44,6 @@ export default function SingleReview() {
                 })
         })
     }
-   
-
     return (
        <>
         <main className ="Home">
@@ -70,13 +64,6 @@ export default function SingleReview() {
         <p><strong>Comment count:</strong>{comment_count}</p>
         <img className="Item_img" src={review_img_url} alt={`picture of ${review_id}`} />
         <Comments />
-        <CommentAdder />
-
         </section>        
-        
-
-     
         </>
-     
-        );
-}
+        )}
