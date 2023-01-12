@@ -56,13 +56,19 @@ export const patchComment = (review_id,inc) =>{
 export const postComment = (review_id, name, body, created_at) =>{
     const postBody={
         username: name,
-        body: body,
-        created_at: created_at
+        body: body
     };
     return reviewApi
     .post(`/reviews/${review_id}/comments`, postBody)
     .then(({data})=>{
-        console.log(data)
+        return data
+    })
+}
+
+export const deleteComment = (comment_id) =>{
+    return reviewApi
+    .delete(`/comments/${comment_id}`)
+    .then(({data})=>{
         return data
     })
 }
