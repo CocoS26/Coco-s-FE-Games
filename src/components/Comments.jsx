@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCommentByReviewId } from "../utils/api"
 import CommentCard from "./CommentCard";
-import CommentAdder from "./CommentAdder";
 
 
 const Comments = () =>{
@@ -25,7 +24,6 @@ useEffect(()=>{
     {return (
     <main className= "CommentList">
     <h2>Comments</h2>
-    <p><CommentAdder setComments={setComments}/></p>
     <section>
     {comments.map((comment)=>{
         return (
@@ -38,8 +36,6 @@ useEffect(()=>{
             </CommentCard>
         )
     })}
-
-
 
     </section>
     </main>

@@ -12,26 +12,23 @@ export const getCategories =()=>{
     })
 }
 export const getReviews = (category,sort_by, order)=>{
+    let queryString= '/reviews'
+    if (sort_by){
+        queryString+=`?sort_by=${sort_by}`
+    }
+    if (order){
+        queryString +=`&order=${order}`
+    }
+    if (category){
+        queryString +=`&category=${category}`
+    }
     
-    // if (category){
-    //     return reviewApi.get(`/reviews?category=${category}&sort_by=${sort_by}&order=${order}`)
-    //     .then ((res)=>{
-    //         return res.data
-    //     })
-    // }
-    // if (category||sort_by||order){
-         return reviewApi.get(`/reviews`, {params:{category:category, order:order, sort_by:sort_by} })
-    .then ((res)=>{
-        return res.data
+    return reviewApi.get(queryString)
+        .then ((res)=>{
+            return res.data       
     })
-    // }else{
-    //     return reviewApi.get(`/reviews`)
-    //     .then ((res)=>{
-    //         return res.data
-    //     })
-    // }
-   
-}
+    }
+    
 export const getSingleReview = (review_id)=>{
     return reviewApi.get(`/reviews/${review_id}`)
     .then ((res)=>{
