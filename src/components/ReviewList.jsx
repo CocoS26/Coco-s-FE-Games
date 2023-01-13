@@ -3,10 +3,12 @@ import { getReviews } from "../utils/api";
 import ReviewCard from "./ReviewCard";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
-
+import { useContext } from 'react';
+import { UserContext } from '../contexts/User';
+import { Link } from "react-router-dom";
 
 export default function Reviews() {
+    const userValue = useContext(UserContext)
     const [sortBy, setSortBy] = useState('votes')
     const [isLoading, setIsLoading] = useState(true)
     const [reviews, setReviews] = useState([])
@@ -39,10 +41,25 @@ export default function Reviews() {
 
 
     if (isLoading) return <p className="Loading">Loading...</p>
-   
+    let displayMsg = "Sign Out"
+    let userProfileimg = userValue.users.avatar_url
+    if (userValue.isLoggedIn===true){
+        displayMsg = "Sign Out"
+        userProfileimg = userValue.users.avatar_url
+        
+    }else{
+        displayMsg = "Sign In"
+        userProfileimg =""
+    }
+
     return (
+        
         <main className= "ReviewList">
             <section>
+            <div className= "ReviewList__user"> 
+            <img src={userProfileimg} alt= {`guest login`} className= "ReviewList__userimg"></img> 
+            <Link to="/" className= "ReviewList__UserLogin">{ displayMsg }</Link>
+            </div>
             <select className="Option" value={sortBy} onChange={(e)=>setSortBy(e.target.value)}>
                 <option value="title">Sort By</option>
                 <option value="votes">Votes</option>
@@ -71,6 +88,5 @@ export default function Reviews() {
       </section>
     </main>
     )
-
 }
 

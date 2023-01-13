@@ -9,9 +9,9 @@ const CommentAdder = ({ setComments }) =>{
         e.preventDefault();
     const newUser= {
                 username: "jessjelly",
-                body: e.target[0].value,
+                body: newComment,
             }
-            if (e.target[0].value.length===0) return alert("Empty text field, please try again.")
+            if (newComment===0) return alert("Empty text field, please try again.")
             postComment(review_id,"jessjelly",newUser.body, newUser.created_at)
                 .then((res)=>{
                     setComments((currComment)=>{
