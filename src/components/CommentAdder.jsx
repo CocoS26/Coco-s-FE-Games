@@ -3,12 +3,21 @@ import { useParams } from "react-router-dom";
 import { postComment } from "../utils/api";
 import { useContext } from 'react';
 import { UserContext } from '../contexts/User';
+import { Link } from "react-router-dom";
 const CommentAdder = ({ setComments }) =>{
    
 const { review_id } = useParams();
 const [newComment, setNewComment] = useState('');
-    
    const userValue = useContext(UserContext)
+   if(userValue.isLoggedIn===false){
+    return ( 
+        <>
+        <p>(You need to sign in before you can comment)</p>
+        </>
+       
+    )
+   }
+
     const handleSubmit = (e) =>{
          e.preventDefault();
         const newUser= {
