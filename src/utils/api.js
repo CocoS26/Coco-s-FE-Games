@@ -13,16 +13,8 @@ export const getCategories =()=>{
 }
 export const getReviews = (category,sort_by, order)=>{
     let queryString= '/reviews'
-    if (sort_by){
-        queryString+=`?sort_by=${sort_by}`
-    }
-    if (order){
-        queryString +=`&order=${order}`
-    }
-    if (category){
-        queryString +=`&category=${category}`
-    }
-    return reviewApi.get(queryString)
+
+    return reviewApi.get(queryString,{params:{category:category, order:order, sort_by:sort_by}})
         .then ((res)=>{
             return res.data       
     })
@@ -53,21 +45,23 @@ export const patchComment = (review_id,inc) =>{
     })
 }
 
-export const postComment = (review_id, name, body, created_at) =>{
+export const postComment = (review_id, name, body) =>{
     const postBody={
         username: name,
-        body: body
+        body: body,
+       
     };
     return reviewApi
     .post(`/reviews/${review_id}/comments`, postBody)
     .then(({data})=>{
+        console.log(data)
         return data
     })
 }
+    
 
-export const deleteComment = (comment_id) =>{
-    return reviewApi
-    .delete(`/comments/${comment_id}`)
+export const getUsers=()=>{
+    return reviewApi.get('/users')
     .then(({data})=>{
         return data
     })

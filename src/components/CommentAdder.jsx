@@ -10,20 +10,27 @@ const CommentAdder = ({ setComments }) =>{
     const newUser= {
                 username: "jessjelly",
                 body: e.target[0].value,
-                value: 0,
-                created_at: 1511354613389,
             }
-            
-            postComment(review_id,"jessjelly",newUser.body, "Seconds ago")
+            if (e.target[0].value.length===0) return alert("Empty text field, please try again.")
+            postComment(review_id,"jessjelly",newUser.body, newUser.created_at)
                 .then((res)=>{
                     setComments((currComment)=>{
+                        alert("Thank you for submitting a comment!")
                         return [res,...currComment]
                     })
             })
+                .catch(()=>{
+                    setComments((currComment)=>{
+                        alert("Sorry something went wrong, please try again later.");
+                        return currComment
+                        })
+                })
+                setNewComment("")
         }
-       
+
     return (
-        <form className ="CommentAdder" onSubmit={handleSubmit}>
+        <>
+         <form className ="CommentAdder" onSubmit={handleSubmit}>
             <label>Add a comment</label><br />
             <textarea 
             id= "newComment"
@@ -33,6 +40,9 @@ const CommentAdder = ({ setComments }) =>{
             ></textarea><br />
             <button>Submit</button>
         </form>
+        <button onClick={(e)=>setNewComment("")}>clear</button>
+        </>
+       
     )
 }
 export default CommentAdder;

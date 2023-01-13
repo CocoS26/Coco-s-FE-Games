@@ -9,9 +9,7 @@ const Comments = () =>{
     const [isLoading, setIsLoading] = useState(true)
     const [comments, setComments] = useState([])
     const {review_id} = useParams()
-
-    
-    useEffect(()=>{
+useEffect(()=>{
     setIsLoading(true)
      getCommentByReviewId(review_id)
     .then((commentsFromApi) =>{
@@ -20,17 +18,7 @@ const Comments = () =>{
     })
 },[])
 
-const removeComment =(comment_id) =>{
-    console.log(comment_id)
-    deleteComment(comment_id)
-    .then((res)=>{
-        setComments((currComments)=>{
-         return currComments.filter((comment)=>
-            comment.comment_id !==comment_id)
-          
-    })  
-})
-}
+
 
 if (isLoading) return <p className="Loading">Loading...</p>
 
@@ -51,7 +39,6 @@ if (comments.length!==0)
             votes={comment.votes}
             created_at={comment.created_at}>
             </CommentCard> 
-            <button onClick= {()=> {removeComment(comment.comment_id); alert("Your Comment has been deleted!")}}>Delete</button>
             </li>
             </>
         )

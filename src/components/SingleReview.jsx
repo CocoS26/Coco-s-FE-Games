@@ -6,9 +6,13 @@ import { Link } from "react-router-dom"
 import { getSingleReview } from "../utils/api";
 import { patchComment } from "../utils/api";
 import Comments from "./Comments"
+import { useContext } from 'react';
+import { UserContext } from '../contexts/User';
 
 
 export default function SingleReview() {
+    const userValue = useContext(UserContext)
+
     const { review_id } = useParams();
     const [review, setReview] = useState({});
     const [isError, setIsError] = useState(false);
@@ -44,12 +48,19 @@ export default function SingleReview() {
                 })
         })
     }
-    return (
+    if (userValue.isLoggedIn===true)
+    {return (
        <>
         <main className ="Home">
         < Link to="/reviews"className= "Header__link">
             <h2>Return To Home Page</h2>
         </Link>
+        <div className= "ReviewList__user">
+            <img src={userValue.users.avatar_url} alt= {`${userValue.users.name} profile`} className= "ReviewList__userimg"></img>
+
+            <p>{userValue.users.username} is signed in</p>
+            
+        </div>
         </main >
         <section className="ReviewCard">
         <p><strong>Title:</strong>{title}</p>
@@ -67,3 +78,28 @@ export default function SingleReview() {
         </section>        
         </>
         )}
+else{return (
+    <>
+     <main className ="Home">
+     < Link to="/reviews"className= "Header__link">
+         <h2>Return To Home Page</h2>
+     </Link>
+     </main >
+     <section className="ReviewCard">
+     <p><strong>Title:</strong>{title}</p>
+     <p><strong>Designer:</strong>{designer}</p>
+     <p><strong>Owner:</strong> {owner}</p>
+     <p><strong>Category: </strong>{category}</p>
+     <p><strong>Review_body:</strong>{review_body}</p>
+     <p><strong>Created_at:</strong>{created_at}</p>
+     <p><strong>Votes:</strong>{votes}</p>
+     <button onClick={()=>{upVote(review_id,+1)}}>👍<span arial-label="votes for this review"></span></button>
+     <button onClick={()=>{upVote(review_id,-1)}}>👎<span arial-label="dislike this review"></span></button>
+     <p><strong>Comment count:</strong>{comment_count}</p>
+     <img className="Item_img" src={review_img_url} alt={`picture of ${review_id}`} />
+     <Comments />
+     </section>        
+     </>
+     )}
+
+}
