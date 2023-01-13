@@ -4,15 +4,12 @@ import{ getCategories } from "../utils/api";
 
 const Nav = () =>{
     const [categories, setCategories] = useState([]);
-    
     useEffect(()=>{
         getCategories()
         .then(({categories})=>{
             setCategories(categories)
         })
     },[])
-
-
 return <nav className = "Nav">
     <ul>
     {categories.map(category=>{
@@ -24,7 +21,5 @@ return <nav className = "Nav">
     </Link>
 </ul>
 </nav>
-
 }
-
 export default Nav

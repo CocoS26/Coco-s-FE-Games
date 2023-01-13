@@ -47,6 +47,18 @@ body{
   flex-wrap:wrap;
   justify-content:space-evenly;
 }
+.ReviewList__user{
+  display:flex;
+  align-items: center;
+}
+.ReviewList__userimg{
+  height:80px;
+  /* width:80px; */
+  /* border-radius:50%; */
+  object-fit:cover;
+  margin:0 10px
+}
+
 
 .ReviewCard {
   border: solid;
@@ -59,6 +71,19 @@ body{
   height: 50%;
   width: 50%;
 }
+.UserList__list{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-evenly;
+}
+
+
+.User_img{
+  height: 25%;
+  width: 25%;
+}
+
+
 
 .App-link {
   color: #61dafb;
