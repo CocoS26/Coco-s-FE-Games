@@ -66,3 +66,12 @@ export const getUsers=()=>{
         return data
     })
 }
+export const deleteComment = (comment_id) =>{
+
+    return reviewApi
+    .delete(`/comments/${comment_id}`)
+    .then(({data})=>{
+        console.log(data,"api")
+        return data
+    })
+}
