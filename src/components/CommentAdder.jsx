@@ -7,26 +7,6 @@ const CommentAdder = ({ setComments }) =>{
    
     const handleSubmit = (e) =>{
         e.preventDefault();
-    const newUser= {
-                username: "jessjelly",
-                body: newComment,
-            }
-            if (newComment===0) return alert("Empty text field, please try again.")
-            postComment(review_id,"jessjelly",newUser.body, newUser.created_at)
-                .then((res)=>{
-                    setComments((currComment)=>{
-                        alert("Thank you for submitting a comment!")
-                        return [res,...currComment]
-                    })
-            })
-                .catch(()=>{
-                    setComments((currComment)=>{
-                        alert("Sorry something went wrong, please try again later.");
-                        return currComment
-                        })
-                })
-                setNewComment("")
-        }
 
     return (
         <>

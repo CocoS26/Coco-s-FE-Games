@@ -13,6 +13,7 @@ export const getCategories =()=>{
 }
 export const getReviews = (category,sort_by, order)=>{
     let queryString= '/reviews'
+
     return reviewApi.get(queryString,{params:{category:category, order:order, sort_by:sort_by}})
         .then ((res)=>{
             return res.data       

@@ -6,9 +6,7 @@ import ReviewList from './components/ReviewList'
 import Error from './components/Error';
 import SingleReview from './components/SingleReview';
 import Auth from "./components/Auth";
-import UserList from "./components/UserList";
 
-function App() {
   return (
     <div className="App">
       <Header />
