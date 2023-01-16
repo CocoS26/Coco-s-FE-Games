@@ -54,7 +54,7 @@ export const postComment = (review_id, name, body) =>{
     return reviewApi
     .post(`/reviews/${review_id}/comments`, postBody)
     .then(({data})=>{
-        console.log(data)
+        console.log(data, "57")
         return data
     })
 }
@@ -67,11 +67,9 @@ export const getUsers=()=>{
     })
 }
 export const deleteComment = (comment_id) =>{
-
     return reviewApi
     .delete(`/comments/${comment_id}`)
     .then(({data})=>{
-        console.log(data,"api")
         return data
     })
 }

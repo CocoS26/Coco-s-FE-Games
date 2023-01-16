@@ -5,7 +5,6 @@ import { useContext } from 'react';
 import { UserContext } from '../contexts/User';
 import { Link } from "react-router-dom";
 const CommentAdder = ({ setComments }) =>{
-   
 const { review_id } = useParams();
 const [newComment, setNewComment] = useState('');
    const userValue = useContext(UserContext)
@@ -19,16 +18,18 @@ const [newComment, setNewComment] = useState('');
    }
 
     const handleSubmit = (e) =>{
-         e.preventDefault();
+        e.preventDefault();
         const newUser= {
                 username: userValue.users.username,
                 body: e.target[0].value,
             }
-            
+            console.log(e.target[0].value)
             postComment(review_id,userValue.users.username,newUser.body, newUser.created_at)
                 .then((res)=>{
                     setComments((currComment)=>{
                         alert("Thank you for submitting a comment!")
+                        console.log([res,...currComment],"comment adder")
+
                         return [res,...currComment]
                     })
             })
@@ -38,9 +39,10 @@ const [newComment, setNewComment] = useState('');
                         return currComment
                         })
                 })
-                setNewComment("")  
+                setNewComment("") 
+                
         }
-
+       
     return (
         <>
          <form className ="CommentAdder" onSubmit={handleSubmit}>

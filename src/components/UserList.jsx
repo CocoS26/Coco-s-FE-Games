@@ -5,6 +5,7 @@ import  Usercard  from "./Usercard"
 
 export default function UserList() {
     const [users, setUsers] = useState([])
+
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(()=>{
@@ -15,7 +16,6 @@ export default function UserList() {
     })
     },[])
    
-
     if (isLoading) return <p className="Loading">Loading...</p>
 
     return (
@@ -27,7 +27,8 @@ export default function UserList() {
                 {users.users.map(({username, name, avatar_url})=>{
                 return(
                 <li key={username}>
-                <Usercard className= "UserList__list"
+                <Usercard 
+                className= "UserList__list"
                 username={username}
                 name = {name}
                 avatar_url={avatar_url}

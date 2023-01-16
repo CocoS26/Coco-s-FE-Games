@@ -6,6 +6,7 @@ import CommentAdder from "./CommentAdder";
 import { deleteComment } from "../utils/api";
 import { useContext } from 'react';
 import { UserContext } from '../contexts/User';
+//import { RemoveComment } from "./CommentRemover";
 
 const Comments = () =>{
     const userValue = useContext(UserContext)
@@ -19,10 +20,17 @@ useEffect(()=>{
         setComments(commentsFromApi)
         setIsLoading(false)
     })
-},[])
+},[review_id])
 
+if(userValue.isLoggedIn===false){
+    return ( 
+        <>
+        <p>(You need to sign in before you can comment)</p>
+        </> 
+    )
+}
 
-const removeComment =(comment_id) =>{
+const RemoveComment =(comment_id) =>{
     deleteComment(comment_id)
     .then((res)=>{
         setComments((currComments)=>{
@@ -32,20 +40,19 @@ const removeComment =(comment_id) =>{
 })
 }
 
-
 if (isLoading) return <p className="Loading">Loading...</p>
 
 if (comments.length!==0)
     {return (
     <main className= "CommentList">
     <h2>Comments</h2>
-    <p><CommentAdder setComments={setComments}/></p>
+    <p><CommentAdder comments= {comments} setComments={setComments}/></p>
     <section>
     <ul>
-     
         {comments.map((comment)=>{
         if(comment.author===userValue.users.username)
-        {return (
+        {
+            return (
             <>
             <li key={comment.comment_id}> 
             <CommentCard className = "CommentList__list"
@@ -55,7 +62,7 @@ if (comments.length!==0)
             votes={comment.votes}
             created_at={comment.created_at}>
             </CommentCard> 
-            <button onClick= {()=> {removeComment(comment.comment_id);alert("Your comment has been deleted!")}}>Delete</button>
+            <button onClick= {()=> {RemoveComment(comment.comment_id);alert("Your comment has been deleted!")}}>Delete</button>
             </li>
             </>
         )}return( <>
